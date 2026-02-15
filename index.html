@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>Valentine ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      outline: none;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #ff5f6d;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff2f4f;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .countdown {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .love {
+      margin-top: 15px;
+      font-size: 28px;
+      color: #ff2f4f;
+      opacity: 0;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .show-love {
+      animation: show 1s forwards, float 2s ease-in-out infinite;
+    }
+
+    @keyframes show {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border-radius: 15px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="login">
+      <h2>أدخل الباسورد ❤️</h2>
+      <input type="password" id="password" placeholder="الباسورد" />
+      <br />
+      <button onclick="checkPassword()">دخول</button>
+    </div>
+
+    <div id="content" class="hidden">
+      <h2>كل سنة وإنتِ طيبة 💖</h2>
+
+      <div class="countdown" id="countdown"></div>
+
+      <!-- الصورة -->
+      <img src="IMG-20260215-WA0018.jpg" alt="صورة الحب" />
+
+      <!-- فيديو يوتيوب (Shorts) -->
+      <iframe 
+        src="https://www.youtube.com/embed/PkoJfWip6LY" 
+        allowfullscreen>
+      </iframe>
+
+      <div id="loveText" class="love">بحبك ❤️</div>
+    </div>
+  </div>
+
+  <script>
+    const correctPassword = "12/8/2010";
+
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      if (input === correctPassword) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("content").classList.remove("hidden");
+        startCountdown();
+
+        setTimeout(() => {
+          document.getElementById("loveText").classList.add("show-love");
+        }, 3000);
+      } else {
+        alert("الباسورد غلط 😅 حاول تاني");
+      }
+    }
+
+    function startCountdown() {
+      const targetDate = new Date("2025-10-28T00:00:00");
+
+      setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+          document.getElementById("countdown").innerHTML = "وصلنا لليوم المنتظر ❤️";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML =
+          `العد التنازلي: ${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
