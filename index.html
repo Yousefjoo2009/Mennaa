@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#ff4d6d,#ff99ac);
+    text-align:center;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* شاشة الباسورد */
+#login{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#111;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+input{
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    text-align:center;
+}
+
+button{
+    margin-top:10px;
+    padding:8px 20px;
+    border:none;
+    border-radius:8px;
+    background:#ff4d6d;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* محتوى الموقع */
+#content{
+    display:none;
+    padding:20px;
+}
+
+/* الصورة */
+.love-img{
+    width:250px;
+    height:250px;
+    object-fit:cover;
+    border-radius:20px;
+    margin-top:20px;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+/* كلمة بحبك */
+#love{
+    font-size:40px;
+    margin-top:20px;
+    opacity:0;
+    animation: float 2s ease-in-out infinite alternate;
+}
+
+@keyframes float{
+    from{ transform: translateY(0px);}
+    to{ transform: translateY(-15px);}
+}
+
+iframe{
+    margin-top:20px;
+    border-radius:15px;
+}
+</style>
+</head>
+<body>
+
+<div id="login">
+    <h2>اكتب الباسورد ❤️</h2>
+    <input type="password" id="pass" placeholder="الباسورد">
+    <button onclick="checkPass()">دخول</button>
+</div>
+
+<div id="content">
+    <h1>Happy Valentine 💘</h1>
+
+    <h2 id="counter"></h2>
+
+    <!-- الصورة جاهزة -->
+    <img class="love-img" 
+    src="https://i.postimg.cc/9X0YJXnM/IMG-20260215-WA0018.jpg" 
+    alt="love">
+
+    <div id="love">بحبـــكـ 💖</div>
+
+    <!-- الفيديو -->
+    <iframe width="300" height="500"
+    src="https://www.youtube.com/embed/PkoJfWip6LY"
+    frameborder="0"
+    allowfullscreen></iframe>
+</div>
+
+<script>
+function checkPass(){
+    var password = document.getElementById("pass").value;
+    if(password === "12/8/2010"){
+        document.getElementById("login").style.display="none";
+        document.getElementById("content").style.display="block";
+
+        setTimeout(function(){
+            document.getElementById("love").style.opacity="1";
+        },3000);
+    }else{
+        alert("الباسورد غلط 😢");
+    }
+}
+
+/* العداد من 28/10/2025 */
+var startDate = new Date("2025-10-28T00:00:00");
+
+function updateCounter(){
+    var now = new Date();
+    var diff = now - startDate;
+
+    var days = Math.floor(diff / (1000*60*60*24));
+    var hours = Math.floor((diff / (1000*60*60)) % 24);
+    var minutes = Math.floor((diff / (1000*60)) % 60);
+    var seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("counter").innerHTML =
+    days + " يوم ❤️ " +
+    hours + " ساعة 💕 " +
+    minutes + " دقيقة 💗 " +
+    seconds + " ثانية";
+}
+
+setInterval(updateCounter,1000);
+</script>
+
+</body>
+</html>
